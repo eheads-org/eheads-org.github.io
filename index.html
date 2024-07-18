@@ -1,71 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="eHeads: A fellowship for engineering leaders. Learn, share, and get advice from other tech leaders."
-    />
-    <title>eHeads: Engineering Heads</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <header>
-      <div class="mx-4 mt-4">
-        <h1 class="text-2xl md:text-3xl font-bold underline mb-4">
-          eHeads: Engineering Heads
-        </h1>
-      </div>
-    </header>
-    <main>
-      <section class="mx-4 mt-4">
-        <p class="text-base md:text-xl mb-4">
-          A fellowship for engineering leaders
-        </p>
-        <pre
-          class="bg-slate-100 mb-4 py-4 text-xs md:text-base whitespace-pre-wrap"
-        >
-  > Learn how to build high-performing tech teams
-  > Brainstorm solutions to your team's challenges
-  > Get advice and mentoring from other tech leaders
-  > Share your experiences running your own tech team
-  > Get help transitioning into a tech leadership role
 
-  Open to all technology leaders (especially new ones)!
-  > Engineers leading teams formally or informally
-  > Engineering Managers
-  > VPs of Engineering
-  > Heads of Engineering
-  > CTOs
-        </pre>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="eHeads: A fellowship for engineering leaders. Learn, share, and get advice from other tech leaders." />
+  <title>eHeads: Engineering Heads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['var(--font-heading)', 'sans-serif'],
+            body: ['var(--font-body)', 'monospace']
+          },
+          borderRadius: {
+            xl: 'calc(var(--radius) + 4px)',
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)'
+          },
+          keyframes: {
+            "accordion-down": {
+              from: {height: 0},
+              to: {height: "var(--radix-accordion-content-height)"}
+            },
+            "accordion-up": {
+              from: {height: "var(--radix-accordion-content-height)"},
+              to: {height: 0}
+            }
+          },
+          animation: {
+            "accordion-down": "accordion-down 0.2s ease-out",
+            "accordion-up": "accordion-up 0.2s ease-out"
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preload" href="/fonts/dam-sans-9pt.woff2" as="font" type="font/woff2" crossorigin="anonymous"
+    data-next-font="size-adjust">
+  <link rel="preload" href="/fonts/space-mono.woff2" as="font" type="font/woff2" crossorigin="anonymous"
+    data-next-font="size-adjust">
+  <style>
+    :root {
+      --background: hsl(36, 39%, 88%);
+      --foreground: hsl(36, 45%, 15%);
+      --primary: hsl(36, 45%, 70%);
+      --primary-foreground: hsl(36, 45%, 11%);
+      --secondary: hsl(40, 35%, 77%);
+      --secondary-foreground: hsl(36, 45%, 25%);
+      --accent: hsl(36, 64%, 57%);
+      --accent-foreground: hsl(36, 72%, 17%);
+      --destructive: hsl(0, 84%, 37%);
+      --destructive-foreground: hsl(0, 0%, 98%);
+      --muted: hsl(36, 33%, 75%);
+      --muted-foreground: hsl(36, 45%, 25%);
+      --card: hsl(36, 46%, 82%);
+      --card-foreground: hsl(36, 45%, 20%);
+      --popover: hsl(0, 0%, 100%);
+      --popover-foreground: hsl(240, 10%, 3.9%);
+      --border: hsl(36, 45%, 60%);
+      --input: hsl(36, 45%, 60%);
+      --ring: hsl(36, 45%, 30%);
+      --radius: 0rem;
+      --font-sans-serif: 'DM Sans';
+    }
+
+    * {
+      border-color: var(--border);
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-synthesis-weight: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    p, ul, li, a {
+      font-family: 'Space Mono', monospace;
+      --font-monospace: 'Space Mono';
+    }
+
+    .floating-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-muted-foreground {
+      color: var(--muted-foreground);
+    }
+
+    .text-foreground {
+      color: var(--foreground);
+    }
+
+    .text-primary-foreground {
+      color: var(--primary-foreground);
+    }
+
+    .bg-primary {
+      background-color: var(--primary);
+    }
+
+    .bg-background {
+      background-color: var(--background);
+    }
+
+    .bg-muted {
+      background-color: var(--muted);
+    }
+
+</style>
+</head>
+
+<body>
+  <div class="flex flex-col min-h-[100dvh] bg-background text-foreground">
+    <header class="px-4 lg:px-6 h-14 flex items-center fixed top-0 left-0 right-0 z-50 bg-background shadow-sm"><a
+        class="flex items-center justify-center" href="/#"><img src="/images/eHeads-square-20x20.png" alt="eHeads Icon"
+          width="20" height="20" class="h-6 w-6 text-primary"><span class="sr-only">eHeads</span></a>
+      <nav class="ml-auto flex gap-4 sm:gap-6"><a
+          class="text-sm font-medium hover:underline underline-offset-4 text-primary-foreground bg-primary px-3 py-1 rounded"
+          href="/#about">About</a><a
+          class="text-sm font-medium hover:underline underline-offset-4 text-primary-foreground bg-primary px-3 py-1 rounded"
+          href="/#benefits">Benefits</a><a
+          class="text-sm font-medium hover:underline underline-offset-4 text-primary-foreground bg-primary px-3 py-1 rounded hidden"
+          href="/#join">Join</a></nav>
+    </header>
+    <main class="flex-1 pt-14 pb-16">
+      <section class="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-background">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+            <div class="flex flex-col justify-center space-y-4">
+              <div class="space-y-2">
+                <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Elevate Your Tech
+                  Leadership with eHeads</h1>
+                <p class="max-w-[600px] text-muted-foreground md:text-xl">eHeads is a fellowship for engineering
+                  leaders. Open to all technology leaders (especially new ones)!
+                <div class="pl-8">
+                  <ul class="list-disc">
+                    <li>Engineers leading teams formally or informally</li>
+                    <li>Engineering Managers</li>
+                    <li>VPs of Engineering</li>
+                    <li>Heads of Engineering</li>
+                    <li>CTOs</li>
+                  </ul>
+                </div>
+                </p>
+              </div>
+              <div class="flex flex-col gap-2 min-[400px]:flex-row hidden"><a
+                  class="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                  href="/#join">Join eHeads</a><a
+                  class="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hidden"
+                  href="/#">Learn More</a></div>
+            </div><img src="/images/eheads-hero.jpeg" width="849" height="550" alt="Hero"
+              class="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last">
+          </div>
+        </div>
       </section>
-      <section class="mx-4 mt-4">
-        <h2 class="md:text-xl font-bold">Links</h2>
-        <ul>
-          <li>
-            <a
-              class="underline text-sky-500 hover:text-sky-700"
-              href="https://www.linkedin.com/company/eheads/"
-              >LinkedIn</a
-            >
-          </li>
-          <li>
-            <a
-              class="underline text-sky-500 hover:text-sky-700"
-              href="https://www.facebook.com/groups/522598020071942"
-              >Facebook</a
-            >
-          </li>
-          <li>
-            <a
-              class="underline text-sky-500 hover:text-sky-700"
-              href="/privacy-policy"
-              >Privacy Policy</a
-            >
-          </li>
-        </ul>
+      <section id="about" class="w-full py-12 md:py-24 lg:py-32 bg-muted">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="flex flex-col items-center justify-center space-y-4 text-center">
+            <div class="space-y-2">
+              <div class="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">About eHeads
+              </div>
+              <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">Empowering Tech Leaders to Thrive</h2>
+              <p class="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                eHeads is a fellowship designed to support engineering leaders in building high-performing teams,
+                navigating team challenges, and transitioning into tech leadership roles. Through peer-to-peer learning,
+                mentorship, and shared experiences, eHeads members gain the skills and confidence to excel in their
+                roles.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="benefits" class="w-full py-12 md:py-24 lg:py-32 bg-background">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="flex flex-col items-center justify-center space-y-4 text-center">
+            <div class="space-y-2">
+              <div class="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">Benefits</div>
+              <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">Unlock Your Full Potential as a Tech Leader
+              </h2>
+              <p class="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                As an eHeads member, you'll gain access to a powerful network of tech leaders, personalized mentorship,
+                and a supportive community to help you navigate the challenges of building and leading high-performing
+                teams.</p>
+            </div>
+            <div
+              class="mx-auto grid max-w-5xl items-center justify-center gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
+              <div class="grid items-center justify-center gap-1">
+                <div class="flex justify-center items-center"><img
+                    src="/images/benefits-building-high-performing-engineering-team.png" width="200" height="200"
+                    alt="Build High-Performing Teams" class="rounded-lg"></div>
+                <h3 class="text-lg font-bold text-primary">Build High-Performing Teams</h3>
+                <p class="text-sm text-muted-foreground">Learn proven strategies for hiring, managing, and developing
+                  top talent.</p>
+              </div>
+              <div class="grid items-center justify-center gap-1">
+                <div class="flex justify-center items-center"><img src="/images/benefits-solve-team-challenges.png" width="200"
+                    height="200" alt="Solve Team Challenges" class="rounded-lg"></div>
+                <h3 class="text-lg font-bold text-primary">Solve Team Challenges</h3>
+                <p class="text-sm text-muted-foreground">Brainstorm solutions to common team issues with your peers.</p>
+              </div>
+              <div class="grid items-center justify-center gap-1">
+                <div class="flex justify-center items-center"><img src="/images/benefits-gain-mentorship.png" width="200"
+                    height="200" alt="Gain Mentorship" class="rounded-lg"></div>
+                <h3 class="text-lg font-bold text-primary">Gain Mentorship</h3>
+                <p class="text-sm text-muted-foreground">Get advice and guidance from experienced tech leaders.</p>
+              </div>
+              <div class="grid items-center justify-center gap-1">
+                <div class="flex justify-center items-center"><img src="/images/benefits-share-experiences.png" width="200"
+                    height="200" alt="Share Experiences" class="rounded-lg"></div>
+                <h3 class="text-lg font-bold text-primary">Share Experiences</h3>
+                <p class="text-sm text-muted-foreground">Connect with others who understand the challenges of tech
+                  leadership.</p>
+              </div>
+              <div class="grid items-center justify-center gap-1">
+                <div class="flex justify-center items-center"><img src="/images/benfits-transition-to-leadership.png"
+                    width="200" height="200" alt="Transition to Leadership" class="rounded-lg"></div>
+                <h3 class="text-lg font-bold text-primary">Transition to Leadership</h3>
+                <p class="text-sm text-muted-foreground">Develop the skills and confidence to take on tech leadership
+                  roles.</p>
+              </div>
+              <div class="grid items-center justify-center gap-1">
+                <div class="flex justify-center items-center"><img src="/images/benefits-grow-your-network.png" height="200"
+                    alt="Grow Your Network" class="rounded-lg"></div>
+                <h3 class="text-lg font-bold text-primary">Grow Your Network</h3>
+                <p class="text-sm text-muted-foreground">Build relationships with a community of tech leaders.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="join" class="w-full py-12 md:py-24 lg:py-32 border-t bg-muted hidden">
+        <div class="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
+          <div class="space-y-3">
+            <h2 class="text-3xl font-bold tracking-tighter md:text-4xl/tight">Join the eHeads Fellowship</h2>
+            <p
+              class="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Take the next step in your tech leadership journey and apply to join the eHeads fellowship today.</p>
+          </div>
+          <div class="mx-auto w-full max-w-sm space-y-2">
+            <form class="flex gap-2"><input type="email"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 max-w-lg flex-1"
+                placeholder="Enter your email"><button
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-primary text-primary-foreground"
+                type="submit">Apply Now</button></form>
+            <p class="text-xs text-muted-foreground">By applying, you agree to our <a
+                class="underline underline-offset-2 text-primary" href="/#">Terms &amp; Conditions</a></p>
+          </div>
+        </div>
       </section>
     </main>
-  </body>
+    <footer
+      class="floating-footer flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-card">
+      <p class="text-xs text-muted-foreground">© 2024 eHeads. All rights reserved.</p>
+      <nav class="sm:ml-auto flex gap-4 sm:gap-6"><a
+          class="text-xs hover:underline underline-offset-4 flex items-center gap-1" href="/privacy-policy"><svg
+            class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg><span>Privacy</span></a><a class="text-xs hover:underline underline-offset-4 flex items-center gap-1"
+          href="mailto:hello@eheads.org"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>Contact</a></nav>
+      <div class="ml-auto flex gap-4 sm:gap-6"><a class="text-xs hover:underline underline-offset-4"
+          href="https://lu.ma/eheads"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 133 134" fill="none">
+            <path fill="currentColor"
+              d="M133 67C96.282 67 66.5 36.994 66.5 0c0 36.994-29.782 67-66.5 67 36.718 0 66.5 30.006 66.5 67 0-36.994 29.782-67 66.5-67">
+            </path>
+          </svg></a><a class="text-xs hover:underline underline-offset-4"
+          href="https://linkedin.com/company/eheads"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect width="4" height="12" x="2" y="9"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg></a><a class="text-xs hover:underline underline-offset-4"
+          href="https://www.facebook.com/engineering.heads"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg></a><a class="text-xs hover:underline underline-offset-4"
+          href="https://youtube.com/@EngineeringHeads"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17">
+            </path>
+            <path d="m10 15 5-3-5-3z"></path>
+          </svg></a><a class="text-xs hover:underline underline-offset-4" href="https://twitter.com/@eHeadsOrg"><svg
+            class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+            </path>
+          </svg></a><a class="text-xs hover:underline underline-offset-4"
+          href="https://tiktok.com/@marketingeheadsorg"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M16.8217 5.1344C16.0886 4.29394 15.6479 3.19805 15.6479 2H14.7293M16.8217 5.1344C17.4898 5.90063 18.3944 6.45788 19.4245 6.67608C19.7446 6.74574 20.0786 6.78293 20.4266 6.78293V10.2191C18.645 10.2191 16.9932 9.64801 15.6477 8.68211V15.6707C15.6477 19.1627 12.8082 22 9.32386 22C7.50043 22 5.85334 21.2198 4.69806 19.98C3.64486 18.847 2.99994 17.3331 2.99994 15.6707C2.99994 12.2298 5.75592 9.42509 9.17073 9.35079M16.8217 5.1344C16.8039 5.12276 16.7861 5.11101 16.7684 5.09914M6.9855 17.3517C6.64217 16.8781 6.43802 16.2977 6.43802 15.6661C6.43802 14.0734 7.73249 12.7778 9.32394 12.7778C9.62087 12.7778 9.9085 12.8288 10.1776 12.9124V9.40192C9.89921 9.36473 9.61622 9.34149 9.32394 9.34149C9.27287 9.34149 8.86177 9.36884 8.81073 9.36884M14.7244 2H12.2097L12.2051 15.7775C12.1494 17.3192 10.8781 18.5591 9.32386 18.5591C8.35878 18.5591 7.50971 18.0808 6.98079 17.3564">
+            </path>
+          </svg></a></div>
+    </footer>
+  </div>
+</body>
+
 </html>
